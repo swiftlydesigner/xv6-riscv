@@ -1,4 +1,4 @@
-#include "kernel/fcntl.h"
+#include "kernel/types.h"
 #include "user/user.h"
 
 int
@@ -10,12 +10,18 @@ main(int argc, char *argv[])
 
   if (child == 0) {
     set_priority(5);
+    for (int v = 500; v > 0; --v) {
+      write(1, "C", 1);
+    }
+    exit(0);
   }
 
-  for (int v = 100; v > 0; --v) {
-    sleep(2);
-    write(1, child == 0 ? "L" : "H", 1);
+  for (int v = 500; v > 0; --v) {
+    write(1, "P", 1);
   }
+
+  wait(0);
+
 
   exit(0);
 }
