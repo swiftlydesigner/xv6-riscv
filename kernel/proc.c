@@ -107,7 +107,10 @@ allocpid()
 // and return with p->lock held.
 // If there are no free procs, or a memory allocation fails, return 0.
 static struct proc *
-allocproc(void)
+allocproc(void) // default prioority
+                // copy pri to fork() func
+                // scheduler: execute highest priority queue (lowest num) - decide which to run, then run it
+                // create sleep for ulib.c - new syscall func/code
 {
   struct proc *p;
 

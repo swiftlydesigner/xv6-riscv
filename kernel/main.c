@@ -15,6 +15,7 @@ main()
     printkinit();
     printk("\n");
     printk("xv6 kernel is booting\n");
+    printk("Welcome to xv6 - COMP3704/4704 is ready to learn using printk!\n");
     printk("\n");
     kinit();            // physical page allocator
     kvminit();          // create kernel page table
