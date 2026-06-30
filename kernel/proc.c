@@ -442,10 +442,17 @@ scheduler(void)
     intr_on();
     intr_off();
 
+    int highest_pri = -1;
+    for (p = proc; p < &proc[NPROC]; p++) {
+      if (p->priority > highest_pri) {
+        highest_pri = p->priority;
+      }
+    }
+
     int found = 0;
     for (p = proc; p < &proc[NPROC]; p++) {
       acquire(&p->lock);
-      if (p->state == RUNNABLE) {
+      if (p->state == RUNNABLE && p->priority == highest_pri) {
         // Switch to chosen process.  It is the process's job
         // to release its lock and then reacquire it
         // before jumping back to us.
