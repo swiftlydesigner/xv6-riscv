@@ -444,7 +444,7 @@ scheduler(void)
 
     int highest_pri = -1;
     for (p = proc; p < &proc[NPROC]; p++) {
-      if (p->priority > highest_pri) {
+      if (p->state == RUNNABLE && p->priority > highest_pri) {
         highest_pri = p->priority;
       }
     }
