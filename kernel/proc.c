@@ -127,6 +127,7 @@ allocproc(void) // default prioority
 found:
   p->pid = allocpid();
   p->state = USED;
+  p->priority = 60;
 
   // Allocate a trapframe page.
   if ((p->trapframe = (struct trapframe *)kalloc()) == 0) {
@@ -298,7 +299,8 @@ kfork(void)
   release(&np->lock);
 
   acquire(&wait_lock);
-  np->parent = p;
+  np->parent = p; // Update parent
+  np->priority = p->priority; // Update priority to match parent's
   release(&wait_lock);
 
   acquire(&np->lock);
