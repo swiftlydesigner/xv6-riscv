@@ -125,5 +125,7 @@ sys_set_priority(void)
   p->priority = pri;
   release(&p->lock);
 
+  yield();
+
   return 0;
 }
